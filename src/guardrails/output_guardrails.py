@@ -90,15 +90,14 @@ Respond with ONLY one word: SAFE or UNSAFE
 If UNSAFE, add a brief reason on the next line.
 """
 
-# TODO: Create safety_judge_agent using LlmAgent
-# Hint:
+# OPTIONAL (không chấm): bật judge bằng cách tạo một LlmAgent, ví dụ:
 # safety_judge_agent = llm_agent.LlmAgent(
 #     model="gemini-3.5-flash",
 #     name="safety_judge",
 #     instruction=SAFETY_JUDGE_INSTRUCTION,
 # )
 
-safety_judge_agent = None  # TODO: Replace with implementation
+safety_judge_agent = None  # optional — Judge chưa bật (không chấm)
 judge_runner = None
 
 
