@@ -63,7 +63,7 @@ CP1 Setup → CP2 code bộ lọc → CP3 ghép pipeline + sinh results.json
 - [x] **CP2** — `detect_injection`, `topic_filter`, `InputGuardrailPlugin`, `content_filter`, `OutputGuardrailPlugin`
 - [x] **CP3** — rate limiter, audit, monitoring, egress, plugin order, `run_assignment_suite` → `outputs/results.json`
 - [x] **CP4** — ≥ 5 prompt tấn công, `outputs/attack_results.json`, leak Red (3/5; bonus B1)
-- [ ] **CP5** — `pytest tests/public` xanh, `grade.py` chạy, push + nộp link
+- [x] **CP5** — `pytest tests/public` xanh, `grade.py` chạy, đã push (còn nộp link LMS)
 
 ---
 
@@ -719,21 +719,21 @@ python scripts/grade.py --submission-dir . --out outputs/grade_report.json
 ### 5.4 ✅ Checklist Checkpoint 5
 
 Việc 1 — Đủ file:
-- [ ] `outputs/results.json` tồn tại (từ CP3)
-- [ ] `outputs/attack_results.json` tồn tại (từ CP4)
-- [ ] Có (khuyến nghị): `audit_log.json`, `metrics.json`, `unsafe_attack_result.json`, `guards_attack_result.json`
+- [x] `outputs/results.json` tồn tại (từ CP3)
+- [x] `outputs/attack_results.json` tồn tại (từ CP4)
+- [x] Có (khuyến nghị): `audit_log.json`, `metrics.json`, `unsafe_attack_result.json`, `guards_attack_result.json`
 
 Việc 2 — Tự chấm:
-- [ ] `pytest tests/smoke -q` xanh
-- [ ] `pytest tests/public -q` xanh
-- [ ] `python scripts/grade.py --submission-dir . --out outputs/grade_report.json` chạy xong
-- [ ] Mở `grade_report.json`: `technical_failure: false`
-- [ ] `lab_report.md` do `grade.py` sinh — **không** sửa tay
+- [x] `pytest tests/smoke -q` xanh (39 passed)
+- [x] `pytest tests/public -q` xanh (10 passed)
+- [x] `python scripts/grade.py --submission-dir . --out outputs/grade_report.json` chạy xong
+- [x] Mở `grade_report.json`: `technical_failure: false`, schema OK (`points: 10`)
+- [x] `lab_report.md` do `grade.py` sinh — **không** sửa tay
 
 Việc 3 — Nộp:
-- [ ] `git status` không thấy `.env` / API key
-- [ ] Đã push lên fork GitHub
-- [ ] Đã nộp **link repo** lên LMS/CodeLabs đúng hạn
+- [x] `git status` không thấy `.env` / API key (`.env` đã bị `.gitignore` chặn)
+- [x] Đã push lên fork GitHub (`67f5ead..36e1cb3 main -> main`)
+- [ ] Nộp **link repo** lên LMS/CodeLabs đúng hạn ← **bạn tự làm bước này**
 
 ---
 
