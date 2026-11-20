@@ -6,6 +6,50 @@
 
 ---
 
+## Thông tin học viên
+
+- **Họ và tên:** Ngô Ngọc Hải
+- **MSSV:** 2A202603939
+- **Lớp:** K5 — L3B
+- **Repo nộp:** `K5-L3B-DAY11-NgoNgocHai-2A202603939-Guardrails-HITL-Responsible-AI`
+
+## Cách chạy nhanh (từ gốc repo)
+
+**Windows (PowerShell):**
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+Copy-Item .env.example .env     # điền OPENROUTER_API_KEY + key Red (OPENAI_API_KEY hoặc GOOGLE_API_KEY)
+pip install -r requirements.txt
+
+python src/main.py --part 2     # CP2 — guardrails (in ra terminal)
+python src/main.py --part 3     # CP3 — sinh outputs/results.json (+ audit_log, metrics)
+python src/main.py --part 4     # CP4 — tấn công Red + Red Advance → outputs/attack_results.json
+
+pytest tests/smoke tests/public -q
+python scripts/grade.py --submission-dir . --out outputs/grade_report.json
+```
+
+**macOS / Linux (bash):**
+
+```bash
+python3 -m venv .venv && source .venv/bin/activate
+cp .env.example .env            # điền OPENROUTER_API_KEY + key Red
+pip install -r requirements.txt
+
+python src/main.py --part 2
+python src/main.py --part 3
+python src/main.py --part 4
+
+pytest tests/smoke tests/public -q
+python scripts/grade.py --submission-dir . --out outputs/grade_report.json
+```
+
+> Hướng dẫn chi tiết từng Checkpoint: [`HUONG-DAN-CHI-TIET.md`](HUONG-DAN-CHI-TIET.md).
+
+---
+
 ## Thời lượng
 
 | Phần | Thời gian |

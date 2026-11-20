@@ -101,6 +101,20 @@ def detect_injection(user_input: str) -> InputStatus:
 # Return ``"ALLOW"`` if banking-related and OK.
 # ============================================================
 
+# Extra benign banking/support vocabulary. Kept separate from ALLOWED_TOPICS and
+# deliberately EXCLUDES credential terms (password/credential/api key/secret) so
+# extraction attempts that contain no injection marker still fall through to BLOCK.
+_BANKING_SUPPORT_TERMS = (
+    "card", "fee", "pin", "branch", "statement", "otp", "refund",
+    "dispute", "beneficiary", "currency", "exchange rate", "mortgage",
+    "insurance", "mobile banking", "online banking", "e-banking",
+    "customer", "support", "debit", "prepaid", "overdraft", "receipt",
+    "invoice", "bill", "charge", "swift", "iban", "redeem", "top-up",
+    "thẻ", "phí", "chi nhánh", "sao kê", "rút tiền", "nạp tiền",
+    "chuyển khoản", "tín dụng", "đóng thẻ", "mở thẻ", "khóa thẻ",
+)
+
+
 def topic_filter(user_input: str) -> InputStatus:
     """Decide whether the input is on-topic for VinBank.
 
@@ -116,11 +130,12 @@ def topic_filter(user_input: str) -> InputStatus:
     # 1. Any explicitly blocked topic -> block.
     if any(topic in input_lower for topic in BLOCKED_TOPICS):
         return "BLOCK"
-    # 2. No banking signal at all -> block (off-topic).
-    if not any(topic in input_lower for topic in ALLOWED_TOPICS):
-        return "BLOCK"
-    # 3. Banking-related -> allow.
-    return "ALLOW"
+    # 2. Banking signal (core list or extended support vocabulary) -> allow.
+    banking_terms = (*ALLOWED_TOPICS, *_BANKING_SUPPORT_TERMS)
+    if any(topic in input_lower for topic in banking_terms):
+        return "ALLOW"
+    # 3. No banking signal at all -> block (off-topic).
+    return "BLOCK"
 
 
 # ============================================================
