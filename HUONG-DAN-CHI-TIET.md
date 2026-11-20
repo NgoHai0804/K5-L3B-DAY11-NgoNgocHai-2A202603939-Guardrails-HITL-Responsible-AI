@@ -61,7 +61,7 @@ CP1 Setup → CP2 code bộ lọc → CP3 ghép pipeline + sinh results.json
 
 - [x] **CP1** — venv + `.env` + smoke test xanh
 - [x] **CP2** — `detect_injection`, `topic_filter`, `InputGuardrailPlugin`, `content_filter`, `OutputGuardrailPlugin`
-- [ ] **CP3** — rate limiter, audit, monitoring, egress, plugin order, `run_assignment_suite` → `outputs/results.json`
+- [x] **CP3** — rate limiter, audit, monitoring, egress, plugin order, `run_assignment_suite` → `outputs/results.json`
 - [ ] **CP4** — ≥ 5 prompt tấn công, `outputs/attack_results.json`, leak Red
 - [ ] **CP5** — `pytest tests/public` xanh, `grade.py` chạy, push + nộp link
 
@@ -560,37 +560,37 @@ pytest tests/public/test_results_contract.py -q
 ### 3.7 ✅ Checklist Checkpoint 3
 
 Việc 1 — Rate limit:
-- [ ] `RateLimitPlugin.on_user_message_callback` đã implement (không còn `raise NotImplementedError`)
-- [ ] Xóa timestamp cũ khỏi window; vượt `max_requests` → trả message chặn + tăng `blocked_count`
-- [ ] Chưa vượt → append timestamp, trả `None`
+- [x] `RateLimitPlugin.on_user_message_callback` đã implement (không còn `raise NotImplementedError`)
+- [x] Xóa timestamp cũ khỏi window; vượt `max_requests` → trả message chặn + tăng `blocked_count`
+- [x] Chưa vượt → append timestamp, trả `None`
 
 Việc 2 — Audit:
-- [ ] `record_input` / `record_output` / `export_json` đã implement
-- [ ] `export_json()` ghi ra `<repo>/outputs/audit_log.json`
+- [x] `record_input` / `record_output` / `export_json` đã implement
+- [x] `export_json()` ghi ra `<repo>/outputs/audit_log.json`
 
 Việc 3 — Monitoring:
-- [ ] `check_metrics` tạo `Alert` khi vượt ngưỡng
-- [ ] `export_json()` ghi ra `<repo>/outputs/metrics.json`
+- [x] `check_metrics` tạo `Alert` khi vượt ngưỡng
+- [x] `export_json()` ghi ra `<repo>/outputs/metrics.json`
 
 Việc 4 — Plugin order:
-- [ ] `build_production_plugins()` trả đúng thứ tự: `RateLimitPlugin` → `InputGuardrailPlugin` → `OutputGuardrailPlugin`
-- [ ] `build_observability()` trả `(AuditLogPlugin(), MonitoringAlert())`
+- [x] `build_production_plugins()` trả đúng thứ tự: `RateLimitPlugin` → `InputGuardrailPlugin` → `OutputGuardrailPlugin`
+- [x] `build_observability()` trả `(AuditLogPlugin(), MonitoringAlert())`
 
 Việc 5 — Egress:
-- [ ] `is_egress_allowed` chặn domain lạ và payload chứa secret/SĐT/email
-- [ ] `https://api.vinbank.example/v1/transfers` + payload banking → `True`
-- [ ] Payload chứa `admin123` hoặc host lạ → `False`
+- [x] `is_egress_allowed` chặn domain lạ và payload chứa secret/SĐT/email
+- [x] `https://api.vinbank.example/v1/transfers` + payload banking → `True`
+- [x] Payload chứa `admin123` hoặc host lạ → `False`
 
 Việc 6 — Suite & artifact:
-- [ ] `run_assignment_suite` đã implement (không còn `raise NotImplementedError`)
-- [ ] `python src/main.py --part 3` chạy xong, không lỗi
-- [ ] `outputs/` có đủ `results.json`, `audit_log.json`, `metrics.json`
-- [ ] `results.json` khớp `schemas/results.schema.json`
-- [ ] `safe_queries` ≥ 5 và **không** câu nào `blocked: true`
-- [ ] `attack_queries` ≥ 7 và **≥ 5** câu `blocked: true`
-- [ ] `edge_cases` ≥ 3, mỗi dòng có `input` + `blocked`
-- [ ] `rate_limit`: `passed + blocked == sent`, `blocked ≥ 1`
-- [ ] `pytest tests/public/test_results_contract.py -q` xanh
+- [x] `run_assignment_suite` đã implement (không còn `raise NotImplementedError`)
+- [x] `python src/main.py --part 3` chạy xong, không lỗi
+- [x] `outputs/` có đủ `results.json`, `audit_log.json`, `metrics.json`
+- [x] `results.json` khớp `schemas/results.schema.json`
+- [x] `safe_queries` ≥ 5 và **không** câu nào `blocked: true`
+- [x] `attack_queries` ≥ 7 và **≥ 5** câu `blocked: true`
+- [x] `edge_cases` ≥ 3, mỗi dòng có `input` + `blocked`
+- [x] `rate_limit`: `passed + blocked == sent`, `blocked ≥ 1`
+- [x] `pytest tests/public/test_results_contract.py -q` xanh
 
 ---
 
